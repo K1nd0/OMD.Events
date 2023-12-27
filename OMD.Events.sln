@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34321.82
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OMD.Events", "OMD.Events\OMD.Events.csproj", "{09DBDF14-3B31-41CF-A334-D8751A0C972B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{09DBDF14-3B31-41CF-A334-D8751A0C972B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09DBDF14-3B31-41CF-A334-D8751A0C972B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09DBDF14-3B31-41CF-A334-D8751A0C972B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09DBDF14-3B31-41CF-A334-D8751A0C972B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D9924C38-4D28-4F4C-BE0F-5CF9ADA686D8}
+	EndGlobalSection
+EndGlobal
