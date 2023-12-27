@@ -1,13 +1,55 @@
 # OMD.Events
-An Unturned OpenMod plugin which implements additional events and allows developers to easily implement their own events interface.
+An OpenMod / Unturned plugin which implements additional events and allows developers to easily implement their own events interface.
 
-## How to install or update plugin
-Install plugin with command: `openmod install OMD.Events`
+[![Nuget](https://img.shields.io/nuget/v/OMD.Events)](https://www.nuget.org/packages/OMD.Events/)
+[![Nuget](https://img.shields.io/nuget/dt/OMD.Events?label=nuget%20downloads)](https://www.nuget.org/packages/OMD.Events/)
 
-## How to easily implement your own additional events 
-- In progress...
+# How to install
+Run this command: `openmod install OMD.Events`
 
-## Implemeted events
+# How to easily implement your own additional events 
+You can implement you custom handler classes by inheriting from [OMD.Events.Models.EventsHandler](https://github.com/DevInc0/OMD.Events/blob/master/OMD.Events/Models/EventsHandler.cs)
+
+Here's an example on how to do so:
+
+```cs
+using OMD.Events.Models;
+using OMD.Events.Services;
+using SDG.Unturned;
+using OpenMod.Unturned.Players;
+
+namespace Your.Namespace;
+
+internal sealed class YourCustomEventsHandler : EventsHandler
+{
+    // Make sure you implement a .cctor with IEventsService parameter 
+    internal YourCustomEventsHandler(IEventsService eventsService) : base(eventsService) { }
+
+    public override void Subscribe()
+    {
+        // Sunscribe to events you want
+        SomeClass.SomeEvent += Events_Handler;
+    }
+
+    public override void Unsubscribe()
+    {
+        // Make sure you unsubscribe from them
+        SomeClass.SomeEvent -= Events_Handler;
+    }
+
+    private void Events_Handler(Player player) 
+    {
+        UnturnedPlayer unturnedPlayer = GetUnturnedPlayer(player); // get UnturnedPlayer instance from SDG.Unturned.Player one
+        YourCustomEvent @event = new YourCustomEvent(unturnedPlayer);
+
+        Emit(@event); // emit your event and handle it whereever you want
+    }
+}
+```
+
+The plugin will scan through all types in all loaded plugins. And call `Subscribe()` and `Unsubscribe()`, so you can focus on creating you plugin.
+
+# Built-in events
 #### OMD.Events.Weapons
 - `UnturnedPlayerChangedFiremodeEvent` fired when player changed his weapons fire mode
 	- `UnturnedPlayer Player` - player's instance
