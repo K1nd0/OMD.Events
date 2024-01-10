@@ -85,7 +85,7 @@ public sealed class EventsService(ILogger<EventsService> logger, IServiceProvide
             try { return assembly.GetTypes(); }
             catch (Exception) { return Array.Empty<Type>(); }
         }).Where(type => {
-            try { return type != baseType && baseType.IsAssignableFrom(type); }
+            try { return !type.IsAbstract && baseType.IsAssignableFrom(type); }
             catch (Exception) { return false; }
         });
     }
