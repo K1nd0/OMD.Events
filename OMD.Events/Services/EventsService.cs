@@ -45,7 +45,8 @@ public sealed class EventsService(ILogger<EventsService> logger, IServiceProvide
 
                 EventsHandlers.Add(eventsHandler);
 
-                Logger.LogInformation($"Successfully created events handler instance of {type.Name}");
+                Logger.LogInformation("Successfully created events handler instance of {typeName}",
+                    type.Name);
             }
             catch (ArgumentNullException exception)
             {
