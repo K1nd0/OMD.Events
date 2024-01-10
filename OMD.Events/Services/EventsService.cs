@@ -5,6 +5,7 @@ using OpenMod.API;
 using OpenMod.API.Eventing;
 using OpenMod.API.Ioc;
 using OpenMod.Core.Helpers;
+using OpenMod.Unturned.Players;
 using OpenMod.Unturned.Users;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,7 @@ public sealed class EventsService(ILogger<EventsService> logger, IServiceProvide
     public void Init()
     {
         const BindingFlags BindingFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+
         var targetTypes = FindEventHandlerTypes();
 
         foreach (var type in targetTypes)
@@ -58,6 +60,18 @@ public sealed class EventsService(ILogger<EventsService> logger, IServiceProvide
             eventHandler.Unsubscribe();
     }
 
+    public void SubscribePlayer(UnturnedPlayer player)
+    {
+        foreach (var handler in EventsHandlers.OfType<PlayerEventsHandler>())
+            handler.SubscribePlayer(player);
+    }
+
+    public void UnsubscribePlayer(UnturnedPlayer player)
+    {
+        foreach (var handler in EventsHandlers.OfType<PlayerEventsHandler>())
+            handler.UnsubscribePlayer(player);
+    }
+
     public void Emit(IEvent @event)
     {
         AsyncHelper.RunSync(() => EventBus.EmitAsync(OpenModHost, this, @event));
@@ -74,5 +88,5 @@ public sealed class EventsService(ILogger<EventsService> logger, IServiceProvide
             try { return type != baseType && baseType.IsAssignableFrom(type); }
             catch (Exception) { return false; }
         });
-    } 
+    }
 }
