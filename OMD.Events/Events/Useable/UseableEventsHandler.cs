@@ -76,15 +76,21 @@ internal sealed class UseableEventsHandler(IEventsService eventsService) : Event
 
         [HarmonyPostfix]
         [HarmonyPatch("performUseOnSelf")]
-        private static void PerformOnSelfPostfix(UseableConsumeable __instance, ItemConsumeableAsset asset)
+        private static void PerformOnSelfPostfix(UseableConsumeable __instance, ItemConsumeableAsset asset, bool __runOriginal)
         {
+            if (!__runOriginal)
+                return;
+
             OnUsedConsumeable?.Invoke(__instance.player, __instance.player, asset);
         }
 
         [HarmonyPostfix]
         [HarmonyPatch("performAid")]
-        private static void PerformAidPostfix(UseableConsumeable __instance, ItemConsumeableAsset asset, Player ___enemy)
+        private static void PerformAidPostfix(UseableConsumeable __instance, ItemConsumeableAsset asset, Player ___enemy, bool __runOriginal)
         {
+            if (!__runOriginal)
+                return;
+
             OnUsedConsumeable?.Invoke(__instance.player, ___enemy, asset);
         }
     }
