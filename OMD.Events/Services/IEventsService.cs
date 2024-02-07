@@ -21,9 +21,5 @@ public interface IEventsService : IDisposable
 
     void Init();
 
-    void SubscribePlayer(UnturnedPlayer player);
-
-    void UnsubscribePlayer(UnturnedPlayer player);
-
     void Emit(IEvent @event);
 }

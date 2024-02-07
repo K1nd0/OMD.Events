@@ -61,18 +61,6 @@ public sealed class EventsService(ILogger<EventsService> logger, IServiceProvide
             eventHandler.Unsubscribe();
     }
 
-    public void SubscribePlayer(UnturnedPlayer player)
-    {
-        foreach (var handler in EventsHandlers.OfType<PlayerEventsHandler>())
-            handler.SubscribePlayer(player);
-    }
-
-    public void UnsubscribePlayer(UnturnedPlayer player)
-    {
-        foreach (var handler in EventsHandlers.OfType<PlayerEventsHandler>())
-            handler.UnsubscribePlayer(player);
-    }
-
     public void Emit(IEvent @event)
     {
         AsyncHelper.RunSync(() => EventBus.EmitAsync(OpenModHost, this, @event));
@@ -84,7 +72,7 @@ public sealed class EventsService(ILogger<EventsService> logger, IServiceProvide
 
         return AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => {
             try { return assembly.GetTypes(); }
-            catch (Exception) { return Array.Empty<Type>(); }
+            catch (Exception) { return []; }
         }).Where(type => {
             try { return !type.IsAbstract && baseType.IsAssignableFrom(type); }
             catch (Exception) { return false; }
