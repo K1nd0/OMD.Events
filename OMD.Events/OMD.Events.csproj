@@ -1,22 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net481</TargetFramework>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageTags>openmod openmod-plugin unturned</PackageTags>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RootNamespace>OMD.Events</RootNamespace>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <GenerateNugetPackage>true</GenerateNugetPackage>
     <Product>OMD.Events</Product>
+    <RootNamespace>OMD.Events</RootNamespace>
+    <TargetFramework>net481</TargetFramework>
+    <LangVersion>preview</LangVersion>
+    <PlatformTarget>x64</PlatformTarget>
+
     <Nullable>enable</Nullable>
     <WarningsAsErrors>nullable</WarningsAsErrors>
-    <NoWarn>$(NoWarn);NU1701;NU1702;CS0436;CS9107</NoWarn>
+    <NoWarn>$(NoWarn);NU1701;NU1702;CS0436</NoWarn>
+
     <Version>1.4.1</Version>
     <InformationalVersion>1.4.1</InformationalVersion>
     <PackageVersion>1.4.1</PackageVersion>
-    <LangVersion>preview</LangVersion>
-    <PlatformTarget>x64</PlatformTarget>
+    
+    <PackageReleaseNotes>Consumeable postfixes now check for __runOriginal and won't be called if prefix was cancelled.</PackageReleaseNotes>
+
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GenerateNugetPackage>true</GenerateNugetPackage>
+    <PackageId>OMD.Events</PackageId>
+    <Authors>K1nd</Authors>
+    <Title>OMD.Events</Title>
+    <Description>An OpenMod / Unturned plugin which implements additional events and allows developers to easily implement their own events interface.</Description>
+    <PackageTags>openmod unturned plugin library</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIconUrl>https://i.imgur.com/UoDzlYR.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/K1nd0/OMD.Events</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
