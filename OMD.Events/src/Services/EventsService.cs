@@ -5,7 +5,6 @@ using OpenMod.API;
 using OpenMod.API.Eventing;
 using OpenMod.API.Ioc;
 using OpenMod.Core.Helpers;
-using OpenMod.Unturned.Players;
 using OpenMod.Unturned.Users;
 using System;
 using System.Collections.Generic;

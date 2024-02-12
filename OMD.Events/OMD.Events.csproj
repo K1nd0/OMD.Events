@@ -25,7 +25,7 @@
     <Description>An OpenMod / Unturned plugin which implements additional events and allows developers to easily implement their own events interface.</Description>
     <PackageTags>openmod unturned plugin library</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageIconUrl>https://i.imgur.com/UoDzlYR.png</PackageIconUrl>
+    <PackageIcon>icon.png</PackageIcon>
     <RepositoryUrl>https://github.com/K1nd0/OMD.Events</RepositoryUrl>
   </PropertyGroup>
 
@@ -41,6 +41,7 @@
     </PackageReference>
 
     <None Include="docs\README.md" Pack="true" PackagePath="\" />
+    <None Include="images\icon.png" Pack="true" PackagePath="\"/>
   </ItemGroup>
 
   <Target Name="ChangeAliasesOfNugetRefs" BeforeTargets="FindReferenceAssembliesForReferences;ResolveReferences">
