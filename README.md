@@ -1,5 +1,5 @@
 # OMD.Events
-An OpenMod / Unturned plugin which implements additional events and allows developers to easily implement their own events interface.
+An OpenMod / Unturned plugin which implements additional events and allows developers to easily implement their own events interface. Created primarily for developers use.
 
 [![Nuget](https://img.shields.io/nuget/v/OMD.Events)](https://www.nuget.org/packages/OMD.Events/)
 [![Nuget](https://img.shields.io/nuget/dt/OMD.Events?label=nuget%20downloads)](https://www.nuget.org/packages/OMD.Events/)
@@ -17,24 +17,29 @@ using OMD.Events.Models;
 using OMD.Events.Services;
 using SDG.Unturned;
 using OpenMod.Unturned.Players;
+using Action = System.Action;
 
 namespace Your.Namespace;
 
 internal sealed class YourCustomEventsHandler : EventsHandler
 {
-    // Make sure you implement a .cctor with IEventsService parameter 
+    private static event Action? SomeEventFromPatching;
+
+    // Make sure you implement a constructor with IEventsService parameter and pass it to the base constructor
     internal YourCustomEventsHandler(IEventsService eventsService) : base(eventsService) { }
 
     public override void Subscribe()
     {
-        // Sunscribe to events you want
+        // Subscribe to events you want
         SomeClass.SomeEvent += Events_Handler;
+        SomeEventFromPatching += Events_PatchingHandler;
     }
 
     public override void Unsubscribe()
     {
         // Make sure you unsubscribe from them
         SomeClass.SomeEvent -= Events_Handler;
+        SomeEventFromPatching -= Events_PatchingHandler;
     }
 
     private void Events_Handler(Player player) 
@@ -44,10 +49,34 @@ internal sealed class YourCustomEventsHandler : EventsHandler
 
         Emit(@event); // emit your event and handle it whereever you want
     }
+
+    private void Events_PatchingHandler()
+    {
+        // Same idea as in Events_Handler method
+    }
+
+    // You can also use harmony patches
+    // OpenMod will patch it automatically, if YourCustomEventsHandler is declared in plugin assembly
+    [HarmonyPatch(typeof(TargetTypeToPatch))]
+    private static class YourPatch
+    {
+        [HarmonyPrefix]
+        [HarmonyPatch("TargetMethod")]
+        private static void YourPrefix()
+        {
+             SomeEventFromPatching?.Invoke();
+        }
+    }
+}
+
+internal sealed class YourCustomEventListener : IEventListener<YourCustomEvent>
+{
+    // Now you can easily handle your event using OpenMod's event listeners
+    // https://openmod.github.io/openmod-docs/devdoc/concepts/events.html
 }
 ```
 
-The plugin will scan through all types in all loaded plugins. And call `Subscribe()` and `Unsubscribe()`, so you can focus on creating you plugin.
+OMD.Events plugin will scan through all types in every loaded plugin. And call `Subscribe()` and `Unsubscribe()`, so you can focus on creating your plugin.
 
 # Built-in events
 #### OMD.Events.Weapons
