@@ -60,6 +60,9 @@ internal sealed class UseableEventsHandler(IEventsService eventsService) : Event
 
             OnUsingConsumeable?.Invoke(__instance.player, __instance.player, asset, ref isCancelled);
 
+            if (isCancelled)            
+                __instance.player.equipment.dequip();            
+
             return !isCancelled;
         }
 
@@ -70,6 +73,9 @@ internal sealed class UseableEventsHandler(IEventsService eventsService) : Event
             var isCancelled = false;
 
             OnUsingConsumeable?.Invoke(__instance.player, ___enemy, asset, ref isCancelled);
+
+            if (isCancelled)
+                __instance.player.equipment.dequip();
 
             return !isCancelled;
         }

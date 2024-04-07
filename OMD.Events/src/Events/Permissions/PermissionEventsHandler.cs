@@ -19,17 +19,17 @@ internal sealed class PermissionEventsHandler(IEventsService eventsService) : Ev
 
     private static OnPermissionUpdatedHandler? OnPermissionRemoved;
 
-    private static readonly Lazy<IEnumerable<Type>> TargetTypes = new(() => {
+    private static readonly Lazy<Type[]> TargetTypes = new(() => {
         var targetType = typeof(IPermissionStore);
         var domainTypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly => {
             try { return assembly.GetTypes(); }
-            catch (Exception) { return Array.Empty<Type>(); }
+            catch (Exception) { return []; }
         });
 
         return domainTypes.Where(type => {
             try { return type != targetType && targetType.IsAssignableFrom(type); }
             catch (Exception) { return false; }
-        });
+        }).ToArray();
     });
 
     public override void Subscribe()
