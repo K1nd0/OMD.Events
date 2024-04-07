@@ -15,7 +15,7 @@
     <InformationalVersion>1.4.2</InformationalVersion>
     <PackageVersion>1.4.2</PackageVersion>
     
-    <PackageReleaseNotes>Consumeable postfixes now check for __runOriginal and won't be called if prefix was cancelled.</PackageReleaseNotes>
+    <PackageReleaseNotes>Consumeable prefixes now dequip item if consumption was cancelled</PackageReleaseNotes>
 
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <GenerateNugetPackage>true</GenerateNugetPackage>
