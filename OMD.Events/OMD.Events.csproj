@@ -30,18 +30,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Lib.Harmony" Version="2.2.2" />
-    <PackageReference Include="OpenMod.Unturned" Version="3.7.3" />
-    <PackageReference Include="Legacy2CPSWorkaround" Version="1.0.0">
-      <PrivateAssets>All</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net461" Version="1.0.3">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+    <PackageReference Include="OpenMod.Unturned" Version="3.7.4" />
 
     <None Include="docs\README.md" Pack="true" PackagePath="\" />
-    <None Include="images\icon.png" Pack="true" PackagePath="\"/>
+    <None Include="images\icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <Target Name="ChangeAliasesOfNugetRefs" BeforeTargets="FindReferenceAssembliesForReferences;ResolveReferences">
